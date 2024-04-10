@@ -16,7 +16,7 @@ const App = () => {
         <E5113>
           <E5114>
             <E5117>
-              <span className="e5118">Tier</span>
+              <span className="e5118">Gordon</span>
             </E5117>
             <E6143>
               <span className="e6144">Junge</span>
