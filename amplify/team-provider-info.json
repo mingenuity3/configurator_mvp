@@ -1,0 +1,35 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-childrenbooks-dev-70836-authRole",
+      "UnauthRoleArn": "arn:aws:iam::637423590815:role/amplify-childrenbooks-dev-70836-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::637423590815:role/amplify-childrenbooks-dev-70836-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
+      "UnauthRoleName": "amplify-childrenbooks-dev-70836-unauthRole",
+      "StackName": "amplify-childrenbooks-dev-70836",
+      "StackId": "arn:aws:cloudformation:eu-north-1:637423590815:stack/amplify-childrenbooks-dev-70836/7f00b750-066d-11ef-85cc-0a7178b130f3",
+      "AmplifyAppId": "d3outzsvbxn97n"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3outzsvbxn97n",
+          "type": "cicd"
+        }
+      },
+      "function": {
+        "bookmanager": {
+          "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
+          "s3Key": "amplify-builds/bookmanager-7138645157775a63556e-build.zip"
+        }
+      },
+      "storage": {
+        "bookstore": {}
+      },
+      "api": {
+        "bookstoreapi": {}
+      }
+    }
+  }
+}

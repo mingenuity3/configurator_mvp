@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/book/{book-id}": {
+      "name": "/book/{book-id}",
+      "lambdaFunction": "bookmanager",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

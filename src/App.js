@@ -1,19 +1,5 @@
 import React, { useState } from 'react';
-import { Amplify } from 'aws-amplify';
 import { put } from 'aws-amplify/api';
-
-
-Amplify.configure({
-  API: {
-    REST: {
-      childrenbookstoreapi: {
-        endpoint:
-          'https://8okigt8yug.execute-api.eu-north-1.amazonaws.com/staging',
-        region: 'eu-north-1' // Optional
-      }
-    }
-  }
-});
 
 function App() {
   const [formData, setFormData] = useState({
@@ -33,9 +19,14 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await put('childrenbookstoreapi', '/book/1', {
-        body: { ...formData }
+      const response = await put({
+        apiName: "bookstoreapi",
+        path: "/book/123",
+        options: {
+          body: { formData },
+        }
       });
+      
       console.log('Response:', response);
       // Optionally, reset the form after successful submission
       setFormData({

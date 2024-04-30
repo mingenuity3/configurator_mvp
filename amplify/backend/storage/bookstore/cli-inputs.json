@@ -1,0 +1,10 @@
+{
+  "resourceName": "bookstore",
+  "tableName": "childrenbooks",
+  "partitionKey": {
+    "fieldName": "book-id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
