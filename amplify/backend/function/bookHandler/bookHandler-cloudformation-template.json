@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.11.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.12.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -15,14 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "storagebookstoreName": {
-      "Type": "String",
-      "Default": "storagebookstoreName"
-    },
-    "storagebookstoreArn": {
-      "Type": "String",
-      "Default": "storagebookstoreArn"
     }
   },
   "Conditions": {
@@ -55,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "bookmanager",
+            "bookHandler",
             {
               "Fn::Join": [
                 "",
                 [
-                  "bookmanager",
+                  "bookHandler",
                   "-",
                   {
                     "Ref": "env"
@@ -86,7 +78,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "python3.10",
         "Layers": [],
         "Timeout": 25
       }
@@ -97,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "childrenbooksLambdaRoleabde5fb5",
+            "childrenbooksLambdaRole591158e7",
             {
               "Fn::Join": [
                 "",
                 [
-                  "childrenbooksLambdaRoleabde5fb5",
+                  "childrenbooksLambdaRole591158e7",
                   "-",
                   {
                     "Ref": "env"
@@ -172,30 +164,12 @@
             {
               "Effect": "Allow",
               "Action": [
-                "dynamodb:DescribeTable",
-                "dynamodb:GetItem",
-                "dynamodb:Query",
-                "dynamodb:Scan",
                 "dynamodb:PutItem",
+                "dynamodb:GetItem",
                 "dynamodb:UpdateItem",
                 "dynamodb:DeleteItem"
               ],
-              "Resource": [
-                {
-                  "Ref": "storagebookstoreArn"
-                },
-                {
-                  "Fn::Join": [
-                    "/",
-                    [
-                      {
-                        "Ref": "storagebookstoreArn"
-                      },
-                      "index/*"
-                    ]
-                  ]
-                }
-              ]
+              "Resource": "arn:aws:dynamodb:*:*:table/*"
             }
           ]
         }

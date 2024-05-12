@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "bookmanager"
+          "resourceName": "bookHandler"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -16,22 +16,9 @@
     }
   },
   "function": {
-    "bookmanager": {
+    "bookHandler": {
       "build": true,
-      "dependsOn": [
-        {
-          "attributeEnvMap": {
-            "Arn": "TABLE_ARN",
-            "Name": "TABLE_NAME"
-          },
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "storage",
-          "resourceName": "bookstore"
-        }
-      ],
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
@@ -44,19 +31,19 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_bookmanager_deploymentBucketName": {
+    "AMPLIFY_function_bookHandler_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "bookmanager"
+          "resourceName": "bookHandler"
         }
       ]
     },
-    "AMPLIFY_function_bookmanager_s3Key": {
+    "AMPLIFY_function_bookHandler_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "bookmanager"
+          "resourceName": "bookHandler"
         }
       ]
     },
