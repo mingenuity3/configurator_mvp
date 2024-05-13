@@ -23,7 +23,8 @@ def handler(event, context):
         
     if CallerMethod == ConstantPOST:
         BookId = event['pathParameters']['book-id']
-        Name = event['headers']['name']
+        #Name = event['headers']['name']
+        Name = event['body'].get('name')
         db_response = dynamodb.put_item(
             TableName='childrenbooks-dev',
             Item={

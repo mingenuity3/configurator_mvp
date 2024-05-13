@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { put } from 'aws-amplify/api';
+import { post } from 'aws-amplify/api';
 
 function App() {
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await put({
+      const response = await post({
         apiName: "bookstoreapi",
         path: "/book/123",
         options: {
@@ -27,6 +27,7 @@ function App() {
         }
       });
       
+      console.log('Request:', formData);
       console.log('Response:', response);
       // Optionally, reset the form after successful submission
       setFormData({
