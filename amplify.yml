@@ -17,6 +17,7 @@ frontend:
 phases:
     preBuild:
       commands:
+        - echo "Installing pipenv and virtualenv from GitHub.yml"
         - pip3 install --user pipenv
         - pip3 install --user virtualenv
         - export PATH=$PATH:$HOME/.local/bin
