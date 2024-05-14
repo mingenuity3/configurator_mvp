@@ -5,9 +5,9 @@ function App() {
   const [question] = useState("Wer ist der coolste hier?");
   const [selectedOption, setSelectedOption] = useState(null);
   const [options] = useState([
-    { id: 1, text: 'Marc' },
-    { id: 2, text: 'Matthias' },
-    { id: 3, text: 'Matthes' },
+    { id: 1, name: 'Marc' },
+    { id: 2, name: 'Matthias' },
+    { id: 3, name: 'Matthes' },
   ]);
 
   const handleOptionSelect = (optionText) => {
@@ -41,10 +41,10 @@ function App() {
         {options.map((option) => (
           <li
             key={option.id}
-            className={selectedOption === option.text ? 'selected' : ''}
-            onClick={() => handleOptionSelect(option.text)}
+            className={selectedOption === option.name ? 'selected' : ''}
+            onClick={() => handleOptionSelect(option.name)}
           >
-            {option.text}
+            {option.name}
           </li>
         ))}
         </ul>
