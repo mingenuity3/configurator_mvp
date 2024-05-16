@@ -23,8 +23,8 @@ def handler(event, context):
         
     if CallerMethod == ConstantPOST:
         BookId = event['pathParameters']['book-id']
-        Name = event['headers']['name']
-        Name = event['body'].get('name')
+        #Name = event['headers']['name']
+        #Name = event['body'].get('name')
         ParsedJson = json.loads(event['body'])
         Name = ParsedJson['selectedOption']
         db_response = dynamodb.put_item(
