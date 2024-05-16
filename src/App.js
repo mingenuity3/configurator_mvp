@@ -21,7 +21,7 @@ function App() {
         apiName: "bookstoreapi",
         path: "/book/123",
         options: {
-          body: { selectedOption },
+          body: JSON.stringify({ selectedOption }),
         }
       });
       
