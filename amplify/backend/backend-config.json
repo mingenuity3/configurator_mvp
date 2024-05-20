@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "bookHandler"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "generateStoryLambda"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -17,6 +25,17 @@
   },
   "function": {
     "bookHandler": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "childrenbooksOepnAILayer": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer"
+    },
+    "generateStoryLambda": {
       "build": true,
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
@@ -44,6 +63,38 @@
         {
           "category": "function",
           "resourceName": "bookHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_childrenbooksOepnAILayer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "childrenbooksOepnAILayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_childrenbooksOepnAILayer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "childrenbooksOepnAILayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_generateStoryLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generateStoryLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_generateStoryLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generateStoryLambda"
         }
       ]
     },

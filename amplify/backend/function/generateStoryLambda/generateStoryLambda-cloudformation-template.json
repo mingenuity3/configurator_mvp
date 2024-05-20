@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "bookHandler",
+            "generateStoryLambda",
             {
               "Fn::Join": [
                 "",
                 [
-                  "bookHandler",
+                  "generateStoryLambda",
                   "-",
                   {
                     "Ref": "env"
@@ -79,7 +79,7 @@
           ]
         },
         "Runtime": "python3.10",
-        "Layers": [],
+        "Layers": [{ "Ref": "childrenbooksOepnAILayer" }],
         "Timeout": 25
       }
     },
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "childrenbooksLambdaRole591158e7",
+            "childrenbooksLambdaRole508c9827",
             {
               "Fn::Join": [
                 "",
                 [
-                  "childrenbooksLambdaRole591158e7",
+                  "childrenbooksLambdaRole508c9827",
                   "-",
                   {
                     "Ref": "env"
@@ -160,24 +160,6 @@
                   }
                 ]
               }
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:PutItem",
-                "dynamodb:GetItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem"
-              ],
-              "Resource": "arn:aws:dynamodb:*:*:table/*"
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "ssm:GetParameter",
-                "ssm:GetParameters"
-              ],
-              "Resource": "*"
             }
           ]
         }

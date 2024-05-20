@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { post } from 'aws-amplify/api';
+import { post, get } from 'aws-amplify/api';
 import './App.css'; // Assuming you have some CSS to style your component
 
 const App = () => {
@@ -13,6 +13,7 @@ const App = () => {
   const [questions, setQuestions] = useState(initialQuestions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [summary, setSummary] = useState('');
 
   const handleOptionClick = (option) => {
     const updatedQuestions = [...questions];
@@ -60,13 +61,35 @@ const App = () => {
         
         console.log('Request:', categorySelectedOptionPairs);
         console.log('Response:', response);
-        // Optionally, reset the form after successful submission
+
+        // Set the summary in state
+        setSummary(response.summary);
       } catch (error) {
         console.error('Error:', error);
       }
     }
   };
-  
+
+  const handleGenerateSummary = async () => {
+    try {
+      const response = await get({
+        apiName: "bookstoreapi",
+        path: "/summary",
+        options: {
+          body: { 
+            bookid: "6971edc9-e25d-47bc-a6d6-02d2e8c22ed1",
+           },
+        }
+      });
+
+      console.log('Generate Summary Response:', response);
+
+      // Set the summary in state
+      setSummary(response.summary);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   return (
     <div className="app">
@@ -108,7 +131,9 @@ const App = () => {
       </div>
       {allQuestionsAnswered && (
         <div className="submit-container">
-          <button className="submit-button" onClick={handleSubmit}>Submit</button>
+          <button className="submit-button" onClick={handleSubmit} disabled={!allQuestionsAnswered}>
+            Submit
+          </button>
         </div>
       )}
       {isSubmitted && (
@@ -119,6 +144,17 @@ const App = () => {
               <strong>{question.text}</strong> {question.selectedOption}
             </p>
           ))}
+          <p key="summary-area">
+          <strong>Buchzusammenfassung</strong>
+          <textarea
+            className="summary-textarea"
+            value={summary}
+            readOnly
+          />
+          </p>
+          <button className="submit-button" onClick={handleGenerateSummary}>
+            Generate Summary
+          </button>
         </div>
       )}
     </div>

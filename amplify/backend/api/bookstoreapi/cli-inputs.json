@@ -7,6 +7,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/generated-story/{book-id}": {
+      "name": "/generated-story/{book-id}",
+      "lambdaFunction": "generateStoryLambda",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

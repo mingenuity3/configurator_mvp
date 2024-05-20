@@ -22,7 +22,7 @@ def handler(event, context):
         elif caller_method == constant_post:
             book_id = str(uuid.uuid4())
             request_body = json.loads(event['body'])
-            selected_categories = request_body.get('categorySelectedOptionPairs', {})
+            selected_categories = request_body.get('bookid', {})
             db_response = dynamodb.put_item(
                 TableName='childrenbooks-dev',
                 Item={
@@ -41,7 +41,7 @@ def handler(event, context):
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
             },
-            'body': json.dumps(db_response)
+            'body': json.dumps(book_id)
         }
     
     except Exception as e:

@@ -81,7 +81,8 @@ h2 {
   margin-top: 20px;
 }
 
-.submit-button {
+.submit-button,
+.generate-summary-button {
   padding: 10px 20px;
   font-size: 16px;
   border: 1px solid #333;
@@ -91,7 +92,8 @@ h2 {
   cursor: pointer;
 }
 
-.submit-button:hover {
+.submit-button:hover,
+.generate-summary-button:hover {
   background-color: #45a049;
 }
 
@@ -117,4 +119,13 @@ h2 {
 
 .book strong {
   font-weight: bold;
+}
+
+.summary-textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  width: calc(100% - 40px); /* Adjusted to fit within container */
+  margin-top: 20px;
 }
