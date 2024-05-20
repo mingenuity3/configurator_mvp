@@ -15,6 +15,10 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "functionchildrenbooksopenAILayerArn": {
+      "Type": "String",
+      "Default": "functionchildrenbooksopenAILayerArn"
     }
   },
   "Conditions": {
@@ -79,7 +83,11 @@
           ]
         },
         "Runtime": "python3.10",
-        "Layers": ["arn:aws:lambda:eu-north-1:637423590815:layer:childrenbooksOepnAILayer-dev:3"],
+        "Layers": [
+          {
+            "Ref": "functionchildrenbooksopenAILayerArn"
+          }
+        ],
         "Timeout": 25
       }
     },

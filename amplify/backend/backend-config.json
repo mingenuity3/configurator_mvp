@@ -30,14 +30,22 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "childrenbooksOepnAILayer": {
+    "childrenbooksopenAILayer": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer"
     },
     "generateStoryLambda": {
       "build": true,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "childrenbooksopenAILayer"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
@@ -63,22 +71,6 @@
         {
           "category": "function",
           "resourceName": "bookHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_childrenbooksOepnAILayer_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "childrenbooksOepnAILayer"
-        }
-      ]
-    },
-    "AMPLIFY_function_childrenbooksOepnAILayer_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "childrenbooksOepnAILayer"
         }
       ]
     },
