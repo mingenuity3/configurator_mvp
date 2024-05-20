@@ -1,8 +1,8 @@
 {
   "version": 1,
   "paths": {
-    "/book/{book-id}": {
-      "name": "/book/{book-id}",
+    "/book": {
+      "name": "/book",
       "lambdaFunction": "bookHandler",
       "permissions": {
         "setting": "open"

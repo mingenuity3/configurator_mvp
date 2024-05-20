@@ -1,5 +1,6 @@
 import boto3
 import json
+import uuid
 
 dynamodb = boto3.client('dynamodb')
 
@@ -19,14 +20,17 @@ def handler(event, context):
             )
             
         elif caller_method == constant_post:
-            book_id = event['pathParameters'].get('book-id', '')
-            body = json.loads(event['body'])
-            name = body.get('selectedOption', '')
+            book_id = uuid.uuid4()
+            request_body = json.loads(event['body'])
+            selected_categories = request_body.get('categorySelectedOptionPairs', {})
             db_response = dynamodb.put_item(
                 TableName='childrenbooks-dev',
                 Item={
                     'book-id': {'S': book_id},
-                    'name': {'S': name}
+                    'gender': {'S': selected_categories["gender"]},
+                    'name': {'S': selected_categories["name"]},
+                    'value': {'S': selected_categories["value"]},
+                    'issue': {'S': selected_categories["issue"]},
                 }
             )
         
