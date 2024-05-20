@@ -72,7 +72,7 @@ const App = () => {
     try {
       const response = await get({
         apiName: "bookstoreapi",
-        path: "/summary",
+        path: "/generated-story/123",
         options: {
           body: { 
             bookid: "6971edc9-e25d-47bc-a6d6-02d2e8c22ed1",

@@ -79,7 +79,7 @@
           ]
         },
         "Runtime": "python3.10",
-        "Layers": [],
+        "Layers": ["LambdaLayerVersion2f9b181a"],
         "Timeout": 25
       }
     },
