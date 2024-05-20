@@ -79,7 +79,7 @@
           ]
         },
         "Runtime": "python3.10",
-        "Layers": ["LambdaLayerVersion2f9b181a"],
+        "Layers": ["arn:aws:lambda:eu-north-1:637423590815:layer:childrenbooksOepnAILayer-dev:3"],
         "Timeout": 25
       }
     },
