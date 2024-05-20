@@ -14,7 +14,7 @@ def get_parameter_value(key):
 # Set up OpenAI API key
 client = OpenAI(api_key=get_parameter_value("openAI-key"))
 
-def lambda_handler(event, context):
+def handler(event, context):
     request_body = json.loads(event['body'])
     bookid = request_body.get('bookid', {})
     # Retrieve entry from DynamoDB
