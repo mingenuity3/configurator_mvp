@@ -41,32 +41,32 @@ const App = () => {
 
   const allQuestionsAnswered = questions.every(q => q.selectedOption !== '');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     if (allQuestionsAnswered) {
-      setIsSubmitted(true);
-    }
-
-    try {
-      const categorySelectedOptionPairs = {};
-      questions.forEach(question => {
-        categorySelectedOptionPairs[question.category] = question.selectedOption;
-      });
-
-      const response = await post({
-        apiName: "bookstoreapi",
-        path: "/book",
-        options: {
-          body: { categorySelectedOptionPairs }, // Send the formatted data
-        }
-      });
-      
-      console.log('Request:', categorySelectedOptionPairs);
-      console.log('Response:', response);
-      // Optionally, reset the form after successful submission
-    } catch (error) {
-      console.error('Error:', error);
+      try {
+        setIsSubmitted(true);
+        const categorySelectedOptionPairs = {};
+        questions.forEach(question => {
+          categorySelectedOptionPairs[question.category] = question.selectedOption;
+        });
+  
+        const response = await post({
+          apiName: "bookstoreapi",
+          path: "/book",
+          options: {
+            body: { categorySelectedOptionPairs }, // Send the formatted data
+          }
+        });
+        
+        console.log('Request:', categorySelectedOptionPairs);
+        console.log('Response:', response);
+        // Optionally, reset the form after successful submission
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   };
+  
 
   return (
     <div className="app">

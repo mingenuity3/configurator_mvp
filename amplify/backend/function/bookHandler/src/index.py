@@ -20,7 +20,7 @@ def handler(event, context):
             )
             
         elif caller_method == constant_post:
-            book_id = uuid.uuid4()
+            book_id = str(uuid.uuid4())
             request_body = json.loads(event['body'])
             selected_categories = request_body.get('categorySelectedOptionPairs', {})
             db_response = dynamodb.put_item(
