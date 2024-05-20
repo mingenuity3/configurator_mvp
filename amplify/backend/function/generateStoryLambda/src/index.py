@@ -8,7 +8,7 @@ from openai import OpenAI
 dynamodb = boto3.client('dynamodb')
 
 def get_parameter_value(key):
-    ssm = boto3.client('ssm', 'eu-central-1')
+    ssm = boto3.client('ssm', 'eu-north-1')
     parameter = ssm.get_parameter(Name=key)
     return parameter['Parameter']['Value']
 
