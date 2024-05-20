@@ -79,7 +79,7 @@
           ]
         },
         "Runtime": "python3.10",
-        "Layers": [{ "Ref": "childrenbooksOepnAILayer" }],
+        "Layers": [],
         "Timeout": 25
       }
     },
