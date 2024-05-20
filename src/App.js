@@ -62,9 +62,7 @@ const App = () => {
         console.log('Request:', categorySelectedOptionPairs);
         console.log('Response:', response);
 
-        // Set the summary in state
-        setSummary(response.summary);
-      } catch (error) {
+        } catch (error) {
         console.error('Error:', error);
       }
     }
