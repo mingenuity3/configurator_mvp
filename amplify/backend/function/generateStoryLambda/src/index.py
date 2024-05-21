@@ -15,8 +15,9 @@ def get_parameter_value(key):
 client = OpenAI(api_key=get_parameter_value("openAI-key"))
 
 def handler(event, context):
-    request_body = json.loads(event['body'])
-    bookid = request_body.get('bookid', {})
+    bookid = json.loads(event["queryStringParameters"]['book-id'])
+    print(request_body)
+    # bookid = request_body.get('bookid', {})
     # Retrieve entry from DynamoDB
     dynamo_response = dynamodb.get_item(
         TableName='childrensbooks-dev',

@@ -13,6 +13,7 @@ const App = () => {
   const [questions, setQuestions] = useState(initialQuestions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [storyId, setStoryId] = useState('');
   const [summary, setSummary] = useState('');
 
   const handleOptionClick = (option) => {
@@ -50,17 +51,22 @@ const App = () => {
         questions.forEach(question => {
           categorySelectedOptionPairs[question.category] = question.selectedOption;
         });
-  
-        const response = await post({
+      
+        console.log('Request:', categorySelectedOptionPairs);
+
+        const restOperation = post({
           apiName: "bookstoreapi",
           path: "/book",
           options: {
-            body: { categorySelectedOptionPairs }, // Send the formatted data
+            body: { categorySelectedOptionPairs },
           }
         });
         
-        console.log('Request:', categorySelectedOptionPairs);
-        console.log('Response:', response);
+        const {body}= await restOperation.response;
+        const json = await body.json();
+
+        console.log('Response:', json);
+        setStoryId(json);
 
         } catch (error) {
         console.error('Error:', error);
@@ -70,20 +76,18 @@ const App = () => {
 
   const handleGenerateSummary = async () => {
     try {
-      const response = await get({
+      const restOperation = get({
         apiName: "bookstoreapi",
-        path: "/generated-story/123",
-        options: {
-          body: { 
-            bookid: "6971edc9-e25d-47bc-a6d6-02d2e8c22ed1",
-           },
-        }
+        path: `/generated-story/${storyId}`,
       });
 
-      console.log('Generate Summary Response:', response);
+      const {body}= await restOperation.response;
+      const json = await body.json();
+
+      console.log('Generate Summary Response:', json);
 
       // Set the summary in state
-      setSummary(response.summary);
+      setSummary(json);
     } catch (error) {
       console.error('Error:', error);
     }
