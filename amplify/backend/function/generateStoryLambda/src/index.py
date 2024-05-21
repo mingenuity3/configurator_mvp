@@ -18,15 +18,18 @@ def handler(event, context):
     book_id = event["pathParameters"]["book-id"]
         
     dynamo_response = dynamodb.get_item(
-        TableName='childrensbooks-dev',
+        TableName='childrenbooks-dev',
         Key={'book-id': {'S': book_id}}
     )
     
     # Extract data from DynamoDB response
     if 'Item' in dynamo_response:
-        entry = dynamo_response['Item']
-        # Assuming you have an attribute named 'data' in DynamoDB that contains the information you want to send to OpenAI
-        # data_to_send = entry['issue']['S']
+        item = dynamo_response['Item']
+        # Access attributes from the item
+        name = item.get('name', {}).get('S')
+        gender = item.get('gender', {}).get('S')
+        issue = item.get('issue', {}).get('S')
+        value = item.get('value', {}).get('S')
         
         # Send prompt to OpenAI
         MODEL = "gpt-3.5-turbo"
@@ -34,7 +37,7 @@ def handler(event, context):
         model=MODEL,
         messages=[
             {"role": "system", "content": "You write small summaries of childrebook stories."},
-            {"role": "user", "content": "Bitte schreibe eine Geschichte über Gordon & seine Abenteuer."},
+            {"role": "user", "content": f"Bitte schreibe eine Geschichte über {name} einen {gender} wie er {issue} löst mit Hilfe von {value}."},
         ],
         temperature=0,
         )
@@ -58,4 +61,4 @@ def handler(event, context):
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
             },
             'body': json.dumps('Item not found in DynamoDB')
-        }
+        }        
