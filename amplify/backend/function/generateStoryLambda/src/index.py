@@ -16,19 +16,17 @@ client = OpenAI(api_key=get_parameter_value("openAI-key"))
 
 def handler(event, context):
     book_id = event["pathParameters"]["book-id"]
-    print(book_id)
-    # bookid = request_body.get('bookid', {})
-    # Retrieve entry from DynamoDB
+        
     dynamo_response = dynamodb.get_item(
         TableName='childrensbooks-dev',
-        Key={'id': {'S': book_id}}
+        Key={'book-id': {'S': book_id}}
     )
     
     # Extract data from DynamoDB response
     if 'Item' in dynamo_response:
         entry = dynamo_response['Item']
         # Assuming you have an attribute named 'data' in DynamoDB that contains the information you want to send to OpenAI
-        data_to_send = entry['issue']['S']
+        # data_to_send = entry['issue']['S']
         
         # Send prompt to OpenAI
         MODEL = "gpt-3.5-turbo"
