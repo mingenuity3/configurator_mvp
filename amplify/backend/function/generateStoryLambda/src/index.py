@@ -15,13 +15,13 @@ def get_parameter_value(key):
 client = OpenAI(api_key=get_parameter_value("openAI-key"))
 
 def handler(event, context):
-    bookid = json.loads(event["queryStringParameters"]['book-id'])
-    print(request_body)
+    book_id = event["pathParameters"]["book-id"]
+    print(book_id)
     # bookid = request_body.get('bookid', {})
     # Retrieve entry from DynamoDB
     dynamo_response = dynamodb.get_item(
         TableName='childrensbooks-dev',
-        Key={'id': {'S': bookid}}
+        Key={'id': {'S': book_id}}
     )
     
     # Extract data from DynamoDB response
