@@ -44,7 +44,7 @@ def handler(event, context):
             db_response = dynamodb.update_item(
                 TableName='childrenbooks-dev',
                 Key={
-                    'book-id': book_id
+                    'book-id': {'S': book_id}
                 },
                 ConditionExpression= 'attribute_exists(book-id)',
                 UpdateExpression=UpdateExpression,

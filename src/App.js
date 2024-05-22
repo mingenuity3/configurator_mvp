@@ -88,18 +88,18 @@ const App = () => {
 
       // Set the summary in state
       setSummary(json);
-      saveSummary(json);
+      saveSummary(json, storyId);
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-  const saveSummary = summary => {
+  const saveSummary = async (summary, storyId) => {
     try {
       // Save summary to StoryId in DynamoDB
-      const restOperation2 = put({
+      const restOperation = put({
         apiName: "bookstoreapi",
-        path: "/book",
+        path: `/book/${storyId}`,
         options: {
           body: { summary },
         }
