@@ -8,6 +8,7 @@ def handler(event, context):
     caller_method = event['httpMethod']
     constant_get = 'GET'
     constant_post = 'POST'
+    constant_put = 'PUT'
     
     try:
         if caller_method == constant_get:
@@ -32,6 +33,22 @@ def handler(event, context):
                     'value': {'S': selected_categories["value"]},
                     'issue': {'S': selected_categories["issue"]},
                 }
+            )
+
+        elif caller_method == constant_put:
+            book_id = event['pathParameters'].get('book-id', '')
+            request_body = json.loads(event['body'])
+            summary = request_body.get('summary')
+            UpdateExpression = 'SET summary = :val1'
+            ExpressionAttributeValues = {':val1': summary }
+            db_response = dynamodb.update_item(
+                TableName='childrenbooks-dev',
+                Key={
+                    'book-id': book_id
+                },
+                ConditionExpression= 'attribute_exists(book-id)',
+                UpdateExpression=UpdateExpression,
+                ExpressionAttributeValues=ExpressionAttributeValues
             )
         
         return {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { post, get } from 'aws-amplify/api';
+import { post, get, put } from 'aws-amplify/api';
 import './App.css'; // Assuming you have some CSS to style your component
 
 const App = () => {
@@ -88,10 +88,30 @@ const App = () => {
 
       // Set the summary in state
       setSummary(json);
+      saveSummary(json);
     } catch (error) {
       console.error('Error:', error);
     }
   };
+
+  const saveSummary = summary => {
+    try {
+      // Save summary to StoryId in DynamoDB
+      const restOperation2 = put({
+        apiName: "bookstoreapi",
+        path: "/book",
+        options: {
+          body: { summary },
+        }
+      });
+      
+      //const {body}= await restOperation2.response;
+      //const json = await body.json();
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   return (
     <div className="app">
