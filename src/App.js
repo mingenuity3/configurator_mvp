@@ -76,18 +76,20 @@ const App = () => {
 
   const handleGenerateSummary = async () => {
     try {
-      const restOperation = get({
+      const response = await fetch({
         apiName: "bookstoreapi",
         path: `/generated-story/${storyId}`,
       });
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let result = '';
 
-      const {body}= await restOperation.response;
-      const json = await body.json();
-
-      console.log('Generate Summary Response:', json);
-
-      // Set the summary in state
-      setSummary(json);
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        result += decoder.decode(value);
+        setSummary(prevSummary => prevSummary + result); // Update the summary as chunks are received
+      }
     } catch (error) {
       console.error('Error:', error);
     }

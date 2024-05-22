@@ -40,6 +40,7 @@ def handler(event, context):
             {"role": "user", "content": f"Bitte schreibe eine Geschichte über {name} einen {gender} wie er {issue} löst mit Hilfe von {value}."},
         ],
         temperature=0,
+        stream=True
         )
         
         # Return OpenAI response
