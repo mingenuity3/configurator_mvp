@@ -40,7 +40,7 @@ def handler(event, context):
             request_body = json.loads(event['body'])
             summary = request_body.get('summary')
             UpdateExpression = 'SET summary = :val1'
-            ExpressionAttributeValues = {':val1': summary }
+            ExpressionAttributeValues = {':val1': {'S': summary} }
             db_response = dynamodb.update_item(
                 TableName='childrenbooks-dev',
                 Key={
