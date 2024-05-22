@@ -46,7 +46,7 @@ def handler(event, context):
                 Key={
                     'book-id': {'S': book_id}
                 },
-                #ConditionExpression= 'attribute_exists(book-id)',
+                ConditionExpression= 'attribute_exists(book_id)',
                 UpdateExpression=UpdateExpression,
                 ExpressionAttributeValues=ExpressionAttributeValues
             )
