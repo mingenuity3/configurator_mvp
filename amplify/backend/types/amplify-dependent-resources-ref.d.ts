@@ -14,7 +14,7 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
-    "childrenbooksOepnAILayer": {
+    "childrenbooksopenAILayer": {
       "Arn": "string"
     },
     "generateStoryLambda": {

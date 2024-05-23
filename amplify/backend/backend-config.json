@@ -17,6 +17,14 @@
           ],
           "category": "function",
           "resourceName": "generateStoryLambda"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "generateAnswersLambda"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -34,6 +42,20 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer"
+    },
+    "generateAnswersLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "childrenbooksopenAILayer"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     },
     "generateStoryLambda": {
       "build": true,
@@ -71,6 +93,22 @@
         {
           "category": "function",
           "resourceName": "bookHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_childrenbooksopenAILayer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "childrenbooksopenAILayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_childrenbooksopenAILayer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "childrenbooksopenAILayer"
         }
       ]
     },

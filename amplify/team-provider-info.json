@@ -21,12 +21,17 @@
       "function": {
         "bookHandler": {
           "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
-          "s3Key": "amplify-builds/bookHandler-665a5666504968312b32-build.zip"
+          "s3Key": "amplify-builds/bookHandler-397849632b7173496648-build.zip"
         },
         "generateStoryLambda": {
           "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
-          "s3Key": "amplify-builds/generateStoryLambda-576157616e6937535976-build.zip"
-        }
+          "s3Key": "amplify-builds/generateStoryLambda-4170316b543553437358-build.zip"
+        },
+        "childrenbooksopenAILayer": {
+          "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
+          "s3Key": "amplify-builds/childrenbooksopenAILayer-LambdaLayerVersionbb633900-build.zip"
+        },
+        "generateAnswersLambda": {}
       },
       "storage": {
         "bookstore": {}
