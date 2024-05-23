@@ -135,7 +135,7 @@ const App = () => {
                   </button>
                 ))}
               </div>
-            ) : (
+            ) : question.type === 'text' ? (
               <form onSubmit={handleTextSubmit}>
                 <input
                   type="text"
@@ -147,7 +147,7 @@ const App = () => {
                   Submit
                 </button>
               </form>
-            )}
+            ) : null}
           </div>
         ))}
       </div>
