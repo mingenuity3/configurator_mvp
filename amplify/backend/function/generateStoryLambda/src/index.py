@@ -30,6 +30,7 @@ def handler(event, context):
         gender = item.get('gender', {}).get('S')
         issue = item.get('issue', {}).get('S')
         value = item.get('value', {}).get('S')
+        setting = item.get('setting', {}).get('S')
         
         # Send prompt to OpenAI
         MODEL = "gpt-3.5-turbo"
@@ -37,7 +38,7 @@ def handler(event, context):
         model=MODEL,
         messages=[
             {"role": "system", "content": "You write small summaries of childrebook stories."},
-            {"role": "user", "content": f"Bitte schreibe eine Geschichte über {name} einen {gender} wie er {issue} löst mit Hilfe von {value}."},
+            {"role": "user", "content": f"Bitte schreibe eine Geschichte über {name} einen {gender} wie er {issue} löst mit Hilfe von {value} in der Umgebung {setting}."},
         ],
         temperature=0,
         )

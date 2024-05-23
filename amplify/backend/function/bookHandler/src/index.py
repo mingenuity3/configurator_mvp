@@ -32,6 +32,7 @@ def handler(event, context):
                     'name': {'S': selected_categories["name"]},
                     'value': {'S': selected_categories["value"]},
                     'issue': {'S': selected_categories["issue"]},
+                    'setting': {'S': selected_categories["setting"]},
                 }
             )
 

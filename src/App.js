@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { post, get, put } from 'aws-amplify/api';
 import './App.css'; // Assuming you have some CSS to style your component
 
@@ -8,7 +8,7 @@ const App = () => {
     { id: 2, type: 'text', text: 'Wie heißt denn unser:e Hauptcharakter?', category: "name", selectedOption: '' },
     { id: 3, type: 'options', text: 'Welche Werte möchtest du mit deinem Buch vermitteln?', category: "value", options: ['Mut', 'Freundschaft', 'Akzeptanz'], selectedOption: '' },
     { id: 4, type: 'options', text: 'Welche Situation soll gelöst werden?', category: "issue", options: ['Der erste Tag im Kindergarten.', 'Das erst Mal Fahrradfahren.', 'Unser erster Urlaub.'], selectedOption: '' },
-    { id: 5, type: 'options-llm', text: 'Wo spielt die Geschichte?', category: "setting", options: ['Mallorca','Karibik','Kindergarten'], selectedOption: '' }
+    { id: 5, type: 'options-llm', text: 'Wo spielt die Geschichte?', category: "setting", options: ['loading'], selectedOption: '' }
   ];
 
   const [questions, setQuestions] = useState(initialQuestions);
@@ -16,6 +16,46 @@ const App = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [storyId, setStoryId] = useState('');
   const [summary, setSummary] = useState('');
+
+  useEffect(() => {
+    const loadLlmOptions = async () => {
+      const currentQuestion = questions[currentQuestionIndex];
+      if (currentQuestion.type === 'options-llm') {
+        const previousSelections = questions.slice(0, currentQuestionIndex).reduce((acc, question) => {
+          acc[question.category] = question.selectedOption;
+          return acc;
+        }, {});
+
+        try {
+          const restOperation = post({
+            apiName: "bookstoreapi",
+            path: "/generated-answers",
+            options: {
+              body: previousSelections,
+            }
+          });
+          
+          const { body } = await restOperation.response;
+          const newOptions = await body.json();
+          
+          console.log(newOptions);
+          console.log(questions);
+          console.log(previousSelections);
+
+          setQuestions(prevQuestions => {
+            const updatedQuestions = [...prevQuestions];
+            updatedQuestions[currentQuestionIndex].options = newOptions;
+            return updatedQuestions;
+          });
+
+        } catch (error) {
+          console.error('Error fetching options:', error);
+        }
+      }
+    };
+
+    loadLlmOptions();
+  }, [currentQuestionIndex]);
 
   const handleOptionClick = (option) => {
     const updatedQuestions = [...questions];
