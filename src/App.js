@@ -7,7 +7,8 @@ const App = () => {
     { id: 1, type: 'options', text: 'Wer ist der Hauptcharakter?', options: ['Mädchen', 'Junge', 'Tier'], category: "gender", selectedOption: '' },
     { id: 2, type: 'text', text: 'Wie heißt denn unser:e Hauptcharakter?', category: "name", selectedOption: '' },
     { id: 3, type: 'options', text: 'Welche Werte möchtest du mit deinem Buch vermitteln?', category: "value", options: ['Mut', 'Freundschaft', 'Akzeptanz'], selectedOption: '' },
-    { id: 4, type: 'options', text: 'Welche Situation soll gelöst werden?', category: "issue", options: ['Der erste Tag im Kindergarten.', 'Das erst Mal Fahrradfahren.', 'Unser erster Urlaub.'], selectedOption: '' }
+    { id: 4, type: 'options', text: 'Welche Situation soll gelöst werden?', category: "issue", options: ['Der erste Tag im Kindergarten.', 'Das erst Mal Fahrradfahren.', 'Unser erster Urlaub.'], selectedOption: '' },
+    { id: 5, type: 'options-llm', text: 'Wo spielt die Geschichte?', category: "setting", options: ['Mallorca','Karibik','Kindergarten'], selectedOption: '' }
   ];
 
   const [questions, setQuestions] = useState(initialQuestions);
@@ -147,6 +148,19 @@ const App = () => {
                   Submit
                 </button>
               </form>
+            ) : question.type === 'options-llm' ? (
+              <div className="options">
+                {question.options.map(option => (
+                  <button
+                    key={option}
+                    className={`option ${question.selectedOption === option ? 'selected' : ''}`}
+                    onClick={() => handleOptionClick(option)}
+                    disabled={question.selectedOption !== ''}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
             ) : null}
           </div>
         ))}
