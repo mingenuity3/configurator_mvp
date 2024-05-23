@@ -36,7 +36,8 @@ def handler(event, context):
             )
 
         elif caller_method == constant_put:
-            book_id = event['pathParameters'].get('book-id', '')
+            #book_id = event['pathParameters'].get('book-id', '')
+            book_id = event['pathParameters']['proxy']
             request_body = json.loads(event['body'])
             summary = request_body.get('summary')
             UpdateExpression = 'SET summary = :val1'
