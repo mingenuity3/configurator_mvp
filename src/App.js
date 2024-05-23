@@ -88,7 +88,7 @@ const App = () => {
 
       // Set the summary in state
       setSummary(json);
-      //saveSummary(json, storyId);
+      saveSummary(json, storyId);
     } catch (error) {
       console.error('Error:', error);
     }
