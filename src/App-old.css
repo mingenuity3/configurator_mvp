@@ -1,0 +1,132 @@
+.app {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    padding: 20px;
+  }
+  
+  .logo {
+    width: 300px;
+    height: 100px;
+  }
+  
+  .question-container {
+    margin: 20px;
+  }
+  
+  .question-block {
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .option {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+  .option:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .option.selected {
+    background-color: #d0d0d0;
+    border-color: #000;
+  }
+  
+  .option:disabled {
+    background-color: #d0d0d0;
+    cursor: not-allowed;
+  }
+  
+  .text-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    width: calc(100% - 50%); /* Adjusted to fit within container */
+  }
+  
+  .submit-text-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .submit-text-button:hover {
+    background-color: #45a049;
+  }
+  
+  .submit-container {
+    margin-top: 20px;
+  }
+  
+  .submit-button,
+  .generate-summary-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover,
+  .generate-summary-button:hover {
+    background-color: #45a049;
+  }
+  
+  .book {
+    margin: 40px 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: left;
+  }
+  
+  .book h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .book p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  
+  .book strong {
+    font-weight: bold;
+  }
+  
+  .summary-textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    width: calc(100% - 40px); /* Adjusted to fit within container */
+    margin-top: 20px;
+  }
+  

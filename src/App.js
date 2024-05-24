@@ -7,7 +7,7 @@ const App = () => {
     { id: 1, type: 'options', text: 'Wer ist der Hauptcharakter?', options: ['Mädchen', 'Junge', 'Tier'], category: "gender", selectedOption: '' },
     { id: 2, type: 'text', text: 'Wie heißt denn unser:e Hauptcharakter?', category: "name", selectedOption: '' },
     { id: 3, type: 'options', text: 'Welche Werte möchtest du mit deinem Buch vermitteln?', category: "value", options: ['Mut', 'Freundschaft', 'Akzeptanz'], selectedOption: '' },
-    { id: 4, type: 'options', text: 'Welche Situation soll gelöst werden?', category: "issue", options: ['Der erste Tag im Kindergarten.', 'Das erst Mal Fahrradfahren.', 'Unser erster Urlaub.'], selectedOption: '' },
+    { id: 4, type: 'options', text: 'Welche Situation soll gelöst werden?', category: "issue", options: ['Der erste Tag im Kindergarten', 'Das erst Mal Fahrradfahren', 'Unser erster Urlaub'], selectedOption: '' },
     { id: 5, type: 'options-llm', text: 'Wo spielt die Geschichte?', category: "setting", options: ['loading'], selectedOption: '' }
   ];
 
@@ -16,7 +16,7 @@ const App = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [summaryRequested, setSummaryRequested] = useState(false);
   const [storyId, setStoryId] = useState('');
-  const [summary, setSummary] = useState('');
+  const [summary, setSummary] = useState('Zusammenfassung wird generiert');
 
   useEffect(() => {
     const loadLlmOptions = async () => {
@@ -168,23 +168,27 @@ const App = () => {
         <img src="/fabula_logo.png" alt="Fabula Logo" className="logo" />
       </header>
       {!allQuestionsAnswered && (
-        <div className="question-container">
+        <div className="questionanswer-container">
           {questions.slice(currentQuestionIndex, currentQuestionIndex + 1).map((question, index) => (
             <div key={question.id} className="question-block">
-              <h2>{question.text}</h2>
-              {question.type === 'options' ? (
-                <div className="options">
-                  {question.options.map(option => (
-                    <button
-                      key={option}
-                      className={`option ${question.selectedOption === option ? 'selected' : ''}`}
-                      onClick={() => handleOptionClick(option)}
-                      disabled={question.selectedOption !== ''}
-                    >
-                      {option}
-                    </button>
-                  ))}
+              <div className='question-section'>
+                <div className='question-background'>
+                  <h2>{question.text}</h2>
                 </div>
+              </div>
+              {question.type === 'options' ? (
+              <div className="options">
+                {question.options.map(option => (
+                  <button
+                    key={option}
+                    className={`option ${question.selectedOption === option ? 'selected' : ''}`}
+                    onClick={() => handleOptionClick(option)}
+                    disabled={question.selectedOption !== ''}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
               ) : question.type === 'text' ? (
                 <form onSubmit={handleTextSubmit}>
                   <input
@@ -233,11 +237,9 @@ const App = () => {
           <p key="summary-area">
             <strong>Buchzusammenfassung</strong>
           </p>
-          <textarea
-              className="summary-textarea"
-              value={summary}
-              readOnly
-          />
+          <p className="summary-textarea">
+            {summary}
+          </p>
         </div>
       )}
     </div>
