@@ -126,6 +126,7 @@ h2 {
   font-size: 16px;
   border: 1px solid #333;
   border-radius: 5px;
+  height: 300px;
   width: calc(100% - 40px); /* Adjusted to fit within container */
   margin-top: 20px;
 }

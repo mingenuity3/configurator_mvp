@@ -14,6 +14,7 @@ const App = () => {
   const [questions, setQuestions] = useState(initialQuestions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [summaryRequested, setSummaryRequested] = useState(false);
   const [storyId, setStoryId] = useState('');
   const [summary, setSummary] = useState('');
 
@@ -56,6 +57,12 @@ const App = () => {
 
     loadLlmOptions();
   }, [currentQuestionIndex]);
+
+  useEffect(() => {
+      if (allQuestionsAnswered) {
+      handleSubmit();
+    }
+  }, [questions]);
 
   const handleOptionClick = (option) => {
     const updatedQuestions = [...questions];
@@ -116,6 +123,7 @@ const App = () => {
   };
 
   const handleGenerateSummary = async () => {
+    setSummaryRequested(true);
     try {
       const restOperation = get({
         apiName: "bookstoreapi",
@@ -159,78 +167,77 @@ const App = () => {
       <header className="header">
         <img src="/fabula_logo.png" alt="Fabula Logo" className="logo" />
       </header>
-      <div className="question-container">
-        {questions.slice(0, currentQuestionIndex + 1).map((question, index) => (
-          <div key={question.id} className="question-block">
-            <h2>{question.text}</h2>
-            {question.type === 'options' ? (
-              <div className="options">
-                {question.options.map(option => (
-                  <button
-                    key={option}
-                    className={`option ${question.selectedOption === option ? 'selected' : ''}`}
-                    onClick={() => handleOptionClick(option)}
-                    disabled={question.selectedOption !== ''}
-                  >
-                    {option}
+      {!allQuestionsAnswered && (
+        <div className="question-container">
+          {questions.slice(currentQuestionIndex, currentQuestionIndex + 1).map((question, index) => (
+            <div key={question.id} className="question-block">
+              <h2>{question.text}</h2>
+              {question.type === 'options' ? (
+                <div className="options">
+                  {question.options.map(option => (
+                    <button
+                      key={option}
+                      className={`option ${question.selectedOption === option ? 'selected' : ''}`}
+                      onClick={() => handleOptionClick(option)}
+                      disabled={question.selectedOption !== ''}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              ) : question.type === 'text' ? (
+                <form onSubmit={handleTextSubmit}>
+                  <input
+                    type="text"
+                    value={question.selectedOption}
+                    onChange={handleTextChange}
+                    className="text-input"
+                  />
+                  <button type="submit" className="submit-text-button">
+                    Bestätigen
                   </button>
-                ))}
-              </div>
-            ) : question.type === 'text' ? (
-              <form onSubmit={handleTextSubmit}>
-                <input
-                  type="text"
-                  value={question.selectedOption}
-                  onChange={handleTextChange}
-                  className="text-input"
-                />
-                <button type="submit" className="submit-text-button">
-                  Submit
-                </button>
-              </form>
-            ) : question.type === 'options-llm' ? (
-              <div className="options">
-                {question.options.map(option => (
-                  <button
-                    key={option}
-                    className={`option ${question.selectedOption === option ? 'selected' : ''}`}
-                    onClick={() => handleOptionClick(option)}
-                    disabled={question.selectedOption !== ''}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-            ) : null}
-          </div>
-        ))}
-      </div>
-      {allQuestionsAnswered && (
-        <div className="submit-container">
-          <button className="submit-button" onClick={handleSubmit} disabled={!allQuestionsAnswered}>
-            Submit
-          </button>
+                </form>
+              ) : question.type === 'options-llm' ? (
+                <div className="options">
+                  {question.options.map(option => (
+                    <button
+                      key={option}
+                      className={`option ${question.selectedOption === option ? 'selected' : ''}`}
+                      onClick={() => handleOptionClick(option)}
+                      disabled={question.selectedOption !== ''}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          ))}
         </div>
       )}
-      {isSubmitted && (
+      {allQuestionsAnswered && !summaryRequested && (
         <div className="book">
-          <h2>Your Story</h2>
+          <h2>Deine Auswahl</h2>
           {questions.map((question, index) => (
             <p key={question.id}>
               <strong>{question.text}</strong> {question.selectedOption}
             </p>
           ))}
-          <p key="summary-area">
-          <strong>Buchzusammenfassung</strong>
-          <textarea
-            className="summary-textarea"
-            value={summary}
-            readOnly
-          />
-          </p>
           <button className="submit-button" onClick={handleGenerateSummary}>
-            Generate Summary
+            Zusammenfassung erstellen
           </button>
+        </div>
+      )}
+      {summaryRequested && (
+        <div className="book">
+          <p key="summary-area">
+            <strong>Buchzusammenfassung</strong>
+          </p>
+          <textarea
+              className="summary-textarea"
+              value={summary}
+              readOnly
+          />
         </div>
       )}
     </div>
