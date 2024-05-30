@@ -21,6 +21,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/generated-picture": {
+      "name": "/generated-picture",
+      "lambdaFunction": "generatePicturesLambda",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

@@ -25,6 +25,14 @@
           ],
           "category": "function",
           "resourceName": "generateAnswersLambda"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "generatePicturesLambda"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -54,6 +62,12 @@
           "resourceName": "childrenbooksopenAILayer"
         }
       ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "generatePicturesLambda": {
+      "build": true,
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },

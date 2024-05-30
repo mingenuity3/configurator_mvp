@@ -31,7 +31,8 @@
           "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
           "s3Key": "amplify-builds/childrenbooksopenAILayer-LambdaLayerVersionbb633900-build.zip"
         },
-        "generateAnswersLambda": {}
+        "generateAnswersLambda": {},
+        "generatePicturesLambda": {}
       },
       "storage": {
         "bookstore": {}
