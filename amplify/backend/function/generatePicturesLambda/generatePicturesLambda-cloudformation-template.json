@@ -71,7 +71,7 @@
                 "Variables" : {"ENV":{"Ref":"env"},"REGION":{"Ref":"AWS::Region"}}
             },
             "Role": { "Fn::GetAtt": ["LambdaExecutionRole", "Arn"] },
-            "Runtime": "python3.8",
+            "Runtime": "python3.10",
             "Layers": [],
             "Timeout": 25
           }
@@ -131,6 +131,24 @@
                             "logs:CreateLogStream",
                             "logs:PutLogEvents"],
                             "Resource": { "Fn::Sub": [ "arn:aws:logs:${region}:${account}:log-group:/aws/lambda/${lambda}:log-stream:*", { "region": {"Ref": "AWS::Region"}, "account": {"Ref": "AWS::AccountId"}, "lambda": {"Ref": "LambdaFunction"}} ]}
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                              "dynamodb:PutItem",
+                              "dynamodb:GetItem",
+                              "dynamodb:UpdateItem",
+                              "dynamodb:DeleteItem"
+                            ],
+                            "Resource": "arn:aws:dynamodb:*:*:table/*"
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                              "ssm:GetParameter",
+                              "ssm:GetParameters"
+                            ],
+                            "Resource": "*"
                         }
                     ]
                 }

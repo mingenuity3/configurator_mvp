@@ -2,8 +2,6 @@ import json
 import boto3
 import requests
 
-
-
 def handler(event, context):
 
     response = requests.post(
@@ -18,7 +16,7 @@ def handler(event, context):
         "output_format": "jpeg",
     },
     )
-
+ 
     return {
         'statusCode': 200,
         'headers': {
