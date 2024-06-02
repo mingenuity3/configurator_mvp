@@ -80,7 +80,15 @@
     },
     "generatePicturesLambda": {
       "build": true,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "childrenbooksutilsLayer"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
@@ -136,6 +144,54 @@
         {
           "category": "function",
           "resourceName": "childrenbooksopenAILayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_childrenbooksutilsLayer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "childrenbooksutilsLayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_childrenbooksutilsLayer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "childrenbooksutilsLayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_generateAnswersLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generateAnswersLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_generateAnswersLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generateAnswersLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_generatePicturesLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generatePicturesLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_generatePicturesLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generatePicturesLambda"
         }
       ]
     },

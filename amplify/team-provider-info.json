@@ -21,18 +21,28 @@
       "function": {
         "bookHandler": {
           "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
-          "s3Key": "amplify-builds/bookHandler-397849632b7173496648-build.zip"
+          "s3Key": "amplify-builds/bookHandler-634b534b376475426b65-build.zip"
         },
         "generateStoryLambda": {
           "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
-          "s3Key": "amplify-builds/generateStoryLambda-4170316b543553437358-build.zip"
+          "s3Key": "amplify-builds/generateStoryLambda-6a2b53765845714c4b6e-build.zip"
         },
         "childrenbooksopenAILayer": {
           "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
-          "s3Key": "amplify-builds/childrenbooksopenAILayer-LambdaLayerVersionbb633900-build.zip"
+          "s3Key": "amplify-builds/childrenbooksopenAILayer-LambdaLayerVersion8fe6a733-build.zip"
         },
-        "generateAnswersLambda": {},
-        "generatePicturesLambda": {}
+        "generateAnswersLambda": {
+          "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
+          "s3Key": "amplify-builds/generateAnswersLambda-42393959343467794558-build.zip"
+        },
+        "generatePicturesLambda": {
+          "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
+          "s3Key": "amplify-builds/generatePicturesLambda-3338427774456e4e4365-build.zip"
+        },
+        "childrenbooksutilsLayer": {
+          "deploymentBucketName": "amplify-childrenbooks-dev-70836-deployment",
+          "s3Key": "amplify-builds/childrenbooksutilsLayer-LambdaLayerVersion8b0f2f03-build.zip"
+        }
       },
       "storage": {
         "bookstore": {}

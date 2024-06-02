@@ -7,6 +7,7 @@ verify_ssl = true
 
 [packages]
 pytz = "==2024.1"
+requests = "==2.32.3"
 
 [requires]
 python_version = "3.8"

@@ -17,6 +17,23 @@ export type AmplifyDependentResourcesAttributes = {
     "childrenbooksopenAILayer": {
       "Arn": "string"
     },
+    "childrenbooksutilsLayer": {
+      "Arn": "string"
+    },
+    "generateAnswersLambda": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "generatePicturesLambda": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "generateStoryLambda": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
