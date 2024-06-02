@@ -15,6 +15,10 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "functionchildrenbooksutilsLayerArn": {
+      "Type": "String",
+      "Default": "functionchildrenbooksutilsLayerArn"
     }
   },
   "Conditions": {
@@ -79,7 +83,11 @@
           ]
         },
         "Runtime": "python3.10",
-        "Layers": [],
+        "Layers": [
+          {
+            "Ref": "functionchildrenbooksutilsLayerArn"
+          }
+        ],
         "Timeout": 25
       }
     },

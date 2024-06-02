@@ -42,11 +42,24 @@
   "function": {
     "bookHandler": {
       "build": true,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "childrenbooksutilsLayer"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
     "childrenbooksopenAILayer": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer"
+    },
+    "childrenbooksutilsLayer": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer"
