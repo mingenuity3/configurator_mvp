@@ -16,6 +16,8 @@ def handler(event, context):
         "output_format": "png",
     },
     )
+    image_data_encoded = response.json()["image"]
+    image_data = base64.b64decode(image_data_encoded)
  
     return {
         'statusCode': 200,
@@ -24,5 +26,5 @@ def handler(event, context):
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
-        'body': response
+        'body': image_data
     }
