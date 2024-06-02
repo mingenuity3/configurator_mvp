@@ -8,7 +8,7 @@ def handler(event, context):
     f"https://api.stability.ai/v2beta/stable-image/generate/sd3",
     headers={
         "authorization": f"Bearer sk-d4L1y0TpKJH8VWuhykWzktsuNCHbIj14Wgm1P2kNH0jR86bt",
-        "accept": "image/jpeg"
+        "accept": "image/*"
     },
     files={"none": ''},
     data={
