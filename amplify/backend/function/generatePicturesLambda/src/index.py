@@ -36,5 +36,7 @@ def handler(event, context):
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
             'Content-Type': 'image/jpeg'
         },
-        'encoded_image': encoded_image
+        'body': {
+            'encoded_image': encoded_image
+        }
     }
