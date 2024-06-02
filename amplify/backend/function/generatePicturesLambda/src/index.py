@@ -9,23 +9,24 @@ def handler(event, context):
     f"https://api.stability.ai/v2beta/stable-image/generate/sd3",
     headers={
         "authorization": f"Bearer sk-d4L1y0TpKJH8VWuhykWzktsuNCHbIj14Wgm1P2kNH0jR86bt",
-        "accept": "application/json"
+        "accept": "image/*"
     },
     files={"none": ''},
     data={
         "prompt": "character from a childbook",
-        "output_format": "png",
+        "output_format": "jpeg",
     },
     )
-    image_data_encoded = response.json()["image"]
-    image_data = base64.b64decode(image_data_encoded)
+    #image_data_encoded = response.json()["image"]
+    #image_data = base64.b64decode(image_data_encoded)
  
     return {
         'statusCode': 200,
         'headers': {
             'Access-Control-Allow-Headers': '*',
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+            'Content-Type': 'image/jpeg'
         },
-        'body': json.dumps(image_data.decode('utf-8'))
+        'body': json.dumps(response.content)
     }
