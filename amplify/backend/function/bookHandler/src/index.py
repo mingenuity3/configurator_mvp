@@ -26,6 +26,7 @@ def handler(event, context):
             
         elif caller_method == constant_post:
             book_id = str(uuid.uuid4())
+            timestamp = str(datetime.now().astimezone(cet_timezone))
             request_body = json.loads(event['body'])
             selected_categories = request_body.get('categorySelectedOptionPairs', {})
             db_response = dynamodb.put_item(
@@ -37,7 +38,7 @@ def handler(event, context):
                     'value': {'S': selected_categories["value"]},
                     'issue': {'S': selected_categories["issue"]},
                     'setting': {'S': selected_categories["setting"]},
-                    'timestamp': {'S': datetime.now().astimezone(cet_timezone)}
+                    'timestamp': {'S': timestamp}
                 }
             )
 
