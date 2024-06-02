@@ -1,10 +1,12 @@
+#!/usr/bin/env python
 import boto3
 import json
 import uuid
 from datetime import datetime
+import pytz
 
 dynamodb = boto3.client('dynamodb')
-cet_timezone = datetime.timezone('CET')
+cet_timezone = pytz.timezone("CET")
 
 def handler(event, context):
     caller_method = event['httpMethod']
@@ -35,7 +37,7 @@ def handler(event, context):
                     'value': {'S': selected_categories["value"]},
                     'issue': {'S': selected_categories["issue"]},
                     'setting': {'S': selected_categories["setting"]},
-                    'timestamp': {'S': datetime.now(cet_timezone)}
+                    'timestamp': {'S': datetime.now().astimezone(cet_timezone)}
                 }
             )
 
