@@ -17,8 +17,16 @@ def handler(event, context):
         "output_format": "jpeg",
     },
     )
-    #image_data_encoded = response.json()["image"]
-    #image_data = base64.b64decode(image_data_encoded)
+    img = response.content
+    #print(type(img))                      # Just getting type.
+    myObj = [base64.b64encode(img)]          # Encoded the image to base64
+    #print(type(myObj))            # Printing the values
+    #print(myObj[0])               # get the base64 format of the image
+    #print('type(myObj[0]) ================>',type(myObj[0]))
+    return_json = str(myObj[0])           # Assing to return_json variable to return.
+    #print('return_json ========================>',return_json)
+    return_json = return_json.replace("b'","")          # replace this 'b'' is must to get absoulate image.
+    encoded_image = return_json.replace("'","")
  
     return {
         'statusCode': 200,
@@ -28,5 +36,5 @@ def handler(event, context):
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
             'Content-Type': 'image/jpeg'
         },
-        'body': response.content
+        'encoded_image': encoded_image
     }
