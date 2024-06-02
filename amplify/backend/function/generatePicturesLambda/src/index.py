@@ -28,5 +28,5 @@ def handler(event, context):
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
             'Content-Type': 'image/jpeg'
         },
-        'body': json.dumps(response.content)
+        'body': response.content
     }
