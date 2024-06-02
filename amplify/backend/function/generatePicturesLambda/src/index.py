@@ -27,5 +27,5 @@ def handler(event, context):
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
-        'body': image_data
+        'body': json.dumps(image_data.decode('utf-8'))
     }
