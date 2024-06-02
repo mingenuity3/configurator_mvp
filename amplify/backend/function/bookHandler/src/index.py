@@ -1,14 +1,16 @@
 import boto3
 import json
 import uuid
+from datetime import datetime
 
 dynamodb = boto3.client('dynamodb')
+cet_timezone = datetime.timezone('CET')
 
 def handler(event, context):
     caller_method = event['httpMethod']
     constant_get = 'GET'
     constant_post = 'POST'
-    constant_put = 'PUT'
+    constant_put = 'PUT'  
     
     try:
         if caller_method == constant_get:
@@ -33,6 +35,7 @@ def handler(event, context):
                     'value': {'S': selected_categories["value"]},
                     'issue': {'S': selected_categories["issue"]},
                     'setting': {'S': selected_categories["setting"]},
+                    'timestamp': {'S': datetime.now(cet_timezone)}
                 }
             )
 
