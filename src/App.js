@@ -17,6 +17,7 @@ const App = () => {
   const [summaryRequested, setSummaryRequested] = useState(false);
   const [storyId, setStoryId] = useState('');
   const [summary, setSummary] = useState('Zusammenfassung wird generiert');
+  const [previewPic, setPreviewPic] = useState(null);
 
   useEffect(() => {
     const loadLlmOptions = async () => {
@@ -143,6 +144,33 @@ const App = () => {
     }
   };
 
+  const handleGeneratePicture = async () => {
+    const categorySelectedOptionPairs = {};
+        questions.forEach(question => {
+          categorySelectedOptionPairs[question.category] = question.selectedOption;
+        });
+    try {
+      const restOperation = post({
+        apiName: "bookstoreapi",
+        path: `/generated-picture`,
+        options: {
+          body: { categorySelectedOptionPairs },
+        }
+      });
+      
+      const {body}= await restOperation.response;
+      const json = await body.json();
+
+
+      console.log('Generate Summary Response:', json);
+
+      // Set the preview picture in state
+      setPreviewPic(json.encoded_image);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const saveSummary = async (summary, storyId) => {
     try {
       // Save summary to StoryId in DynamoDB
@@ -240,6 +268,12 @@ const App = () => {
           <p className="summary-textarea">
             {summary}
           </p>
+          <button className="create-picture-button" onClick={handleGeneratePicture}>
+            Vorschaubild erzeugen
+          </button>
+          {previewPic && (
+            <img src={`data:image/jpeg;base64,${previewPic}`} alt="Preview Picture" className="preview-picture" />
+          )}
         </div>
       )}
     </div>

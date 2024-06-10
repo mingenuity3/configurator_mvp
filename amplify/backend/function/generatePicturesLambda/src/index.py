@@ -13,7 +13,8 @@ def handler(event, context):
     },
     files={"none": ''},
     data={
-        "prompt": "character from a childbook",
+        #"prompt": "character from a childbook",
+        "prompt": "Ein Kinderbuchcharakter mit dem Geschlecht {gender}, während {issue} in der Umgebung {setting}, Bild vermittelt {value}",
         "output_format": "jpeg",
     },
     )
